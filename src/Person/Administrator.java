@@ -10,5 +10,11 @@ package Person;
  * @author User
  */
 public class Administrator {
-    
+    private String adminID;
+    private String adminName;
+
+    public Administrator(String adminID, String adminName){
+        this.adminID = adminID;
+        this.adminName = adminName;
+    }
 }

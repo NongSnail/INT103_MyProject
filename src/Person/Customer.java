@@ -10,5 +10,5 @@ package Person;
  * @author User
  */
 public class Customer {
-    
+   
 }
