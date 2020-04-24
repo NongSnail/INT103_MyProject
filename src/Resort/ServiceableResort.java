@@ -5,10 +5,13 @@
  */
 package Resort;
 
+import Person.Customer;
+
 /**
  *
  * @author User
  */
-public class ServiceableResort {
-    
+public interface ServiceableResort {
+    public boolean checkIn(Customer c, RoomType t);
+    public boolean checkOut(Customer c, int roomNumber);
 }
