@@ -1,6 +1,7 @@
 package Room;
 
 import Person.Customer;
+import Policy.Price;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
