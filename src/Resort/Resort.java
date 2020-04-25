@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 
 import Person.Administrator;
 import Person.Customer;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -94,9 +93,13 @@ public class Resort implements ServiceableResort {
     }
     
     public static String getHeader(){
-        return "-----------------------------------------------------------------------------------------------" +
-        "\nคิดไม่ออก QwQ"+
-        "\n-----------------------------------------------------------------------------------------------";
+        LocalDate day = LocalDate.now();
+        return "Record history : "+day+
+                //Test
+        "\n----------------------------------------------------------------------------------------------------------------------------" +
+        String.format("\n%5s %10s %10s %15s %15s %15s %15s %15s %15s %10s %10s", 
+                "Room","Room_Type","Customer_Name","IDCard","phone","status","date","Many_Nigth","Room_rate","Total","check") +
+        "\n----------------------------------------------------------------------------------------------------------------------------";
     }
     
     public static boolean checkHeader(String fileName){
