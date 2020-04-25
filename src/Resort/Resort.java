@@ -9,6 +9,11 @@ import java.util.logging.Logger;
 
 import Person.Administrator;
 import Person.Customer;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.FileHandler;
+import java.util.logging.SimpleFormatter;
 
 /**
  *
@@ -21,7 +26,9 @@ public class Resort implements ServiceableResort {
     private Administrator admin;
     private Room rooms[];
     private Logger resortLogger;
-
+    
+    
+    public Resort(){};
     public Resort(String resortName, Administrator admin, int maximumRoom) {
         
     }
@@ -58,8 +65,25 @@ public class Resort implements ServiceableResort {
         return -1;
     }
 
-    private void logHistory() {
+    public void logHistory() throws IOException {
+        String filename = String.format("log_history/%s.log", LocalDate.now().format(
+                DateTimeFormatter.ofPattern("yyyy_MM_dd")
+        ));
+        //////////////////////////////////////////////////////////////////////////////
+        System.setProperty("java.util.logging.SimpleFormatter.format","%5$s");
+        //////////////////////////////////////////////////////////////////////////////
+       
+        String Test = "\nไอ้เป็ด";
+        
+        FileHandler fh = new FileHandler(filename ,true);
+        Logger logger = Logger.getLogger(filename);
+        logger.addHandler(fh);
+        SimpleFormatter formatter = new SimpleFormatter(); 
+        fh.setFormatter(formatter);
+        
+        logger.info(Test);
         
     }
+   
     
 }
