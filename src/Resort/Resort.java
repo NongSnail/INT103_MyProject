@@ -9,9 +9,13 @@ import java.util.logging.Logger;
 
 import Person.Administrator;
 import Person.Customer;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.NoSuchElementException;
 import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
 
@@ -81,9 +85,28 @@ public class Resort implements ServiceableResort {
         SimpleFormatter formatter = new SimpleFormatter(); 
         fh.setFormatter(formatter);
         
+        if(!checkHeader(filename)){
+            logger.info(getHeader());
+        }
+        
         logger.info(Test);
         
     }
+    
+    public static String getHeader(){
+        return "-----------------------------------------------------------------------------------------------" +
+        "\nคิดไม่ออก QwQ"+
+        "\n-----------------------------------------------------------------------------------------------";
+    }
+    
+    public static boolean checkHeader(String fileName){
+        String firstLine = null;
+        try {
+            firstLine = Files.lines(Paths.get(fileName)).findFirst().get(); 
+        } catch (NoSuchElementException e) { } catch (IOException e) { }
+        return "-----------------------------------------------------------------------------------------------".equals(firstLine);
+    }
+    
    
     
 }
