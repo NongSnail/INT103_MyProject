@@ -30,8 +30,6 @@ public class Resort implements ServiceableResort {
     private Room rooms[];
     private Logger resortLogger;
     
-    
-    public Resort(){};
     public Resort(String resortName, Administrator admin, int maximumRoom) {
         this.resortName = resortName;
         this.rooms = new Room[maximumRoom];
@@ -42,8 +40,8 @@ public class Resort implements ServiceableResort {
     @Override
     public boolean checkIn(Customer c, RoomType t) {
         int roomIndex = findForAvailableRoom(t); // set index for rooms[]
-        // if no room available
-        if (roomIndex == -1) {
+        // if no room available OR Customer == null
+        if (roomIndex == -1 || c == null) {
             return false;
         }
         rooms[roomIndex].checkIn(c);
@@ -54,8 +52,8 @@ public class Resort implements ServiceableResort {
     @Override
     public boolean checkOut(Customer c, int roomNumber) {
         int roomIndex = findForSpecifiedRoom(roomNumber); // set index for rooms[]
-        // if roomNumber not found OR Customer doesn't match with this rooom.
-        if (roomIndex == -1 || !rooms[roomIndex].getCustomer().equals(c)) {
+        // if roomNumber not found OR Customer == null OR Customer doesn't match with this rooom.
+        if (roomIndex == -1 || c == null || !rooms[roomIndex].getCustomer().equals(c)) {
             return false;
         }
         rooms[roomIndex].checkout();
