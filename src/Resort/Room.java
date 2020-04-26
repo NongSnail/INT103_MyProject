@@ -35,12 +35,13 @@ public class Room implements Price {
     }
 
     public void checkIn() {
-        roomStatus = RoomStatus.AVAILABLE;
+        roomStatus = RoomStatus.NOT_AVAILABLE;
         checkIn = LocalDateTime.now();
+        // set Customer
     }
 
     public void checkout() {
-        roomStatus = RoomStatus.NOT_AVAILABLE;
+        roomStatus = RoomStatus.AVAILABLE;
         checkout.getDayOfMonth();
         price = calculatePrice();
     }
@@ -54,6 +55,7 @@ public class Room implements Price {
 
     public void resetRoom() {
         roomStatus = RoomStatus.AVAILABLE;
+        // need more null setter to clean all data
     }
 
     public int getRoomNumber() {
