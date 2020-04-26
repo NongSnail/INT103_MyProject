@@ -2,8 +2,6 @@ package Resort;
 
 import Person.Customer;
 import Policy.Price;
-import Room.RoomStatus;
-import Room.RoomType;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
@@ -55,7 +53,7 @@ public class Room implements Price {
     }
 
     public void resetRoom() {
-        roomStatus = roomStatus.AVAILABLE;
+        roomStatus = RoomStatus.AVAILABLE;
     }
 
     public int getRoomNumber() {
@@ -72,6 +70,10 @@ public class Room implements Price {
 
     public Customer getCustomer() {
         return customer;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     @Override
