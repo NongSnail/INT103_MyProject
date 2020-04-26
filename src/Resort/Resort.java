@@ -25,7 +25,7 @@ import java.util.logging.SimpleFormatter;
 public class Resort implements ServiceableResort {
 
     private String resortName;
-    private Customer customers[];
+    private Customer customers[]; // This attribute hasn't been used OR Apply to Customer who checkIn? IF yes -> need more finder methods.
     private Administrator admin;
     private Room rooms[];
     private Logger resortLogger;
@@ -33,19 +33,35 @@ public class Resort implements ServiceableResort {
     
     public Resort(){};
     public Resort(String resortName, Administrator admin, int maximumRoom) {
-        
+        this.resortName = resortName;
+        this.rooms = new Room[maximumRoom];
+        this.customers = new Customer[maximumRoom];
+        this.admin = admin;
     }
 
     @Override
     public boolean checkIn(Customer c, RoomType t) {
-        // TODO Auto-generated method stub
-        return false;
+        int roomIndex = findForAvailableRoom(t); // set index for rooms[]
+        // if no room available
+        if (roomIndex == -1) {
+            return false;
+        }
+        rooms[roomIndex].checkIn(c);
+        logHistory(); // need to handle IOException // to log history
+        return true;
     }
 
     @Override
     public boolean checkOut(Customer c, int roomNumber) {
-        // TODO Auto-generated method stub
-        return false;
+        int roomIndex = findForSpecifiedRoom(roomNumber); // set index for rooms[]
+        // if roomNumber not found OR Customer doesn't match with this rooom.
+        if (roomIndex == -1 || !rooms[roomIndex].getCustomer().equals(c)) {
+            return false;
+        }
+        rooms[roomIndex].checkout();
+        logHistory(); // need to handle IOException // to losg history
+        rooms[roomIndex].resetRoom();
+        return true;
     }
 
     public int findForAvailableRoom(RoomType t) {
