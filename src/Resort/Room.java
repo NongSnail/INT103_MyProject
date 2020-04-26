@@ -32,17 +32,18 @@ public class Room implements Price {
 
     public Room(Room r) {
         this.roomNumber = r.roomNumber;
+        // need to add more setter for logging purpose(to copy object)
     }
 
-    public void checkIn() {
+    public void checkIn(Customer c) {
+        customer = c;
         roomStatus = RoomStatus.NOT_AVAILABLE;
         checkIn = LocalDateTime.now();
-        // set Customer
     }
 
     public void checkout() {
         roomStatus = RoomStatus.AVAILABLE;
-        checkout.getDayOfMonth();
+        checkout = LocalDateTime.now();
         price = calculatePrice();
     }
 
