@@ -32,6 +32,7 @@ public class Room implements Price {
 
     public Room(Room r) {
         this.roomNumber = r.roomNumber;
+        this.roomType = r.roomType;
         // need to add more setter for logging purpose(to copy object)
     }
 
@@ -56,6 +57,10 @@ public class Room implements Price {
 
     public void resetRoom() {
         roomStatus = RoomStatus.AVAILABLE;
+        customer = null;
+        checkIn = null;
+        checkout = null;
+        price = 0;
         // need more null setter to clean all data
     }
 
@@ -77,12 +82,6 @@ public class Room implements Price {
 
     public double getPrice() {
         return price;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        return hash;
     }
 
     @Override
