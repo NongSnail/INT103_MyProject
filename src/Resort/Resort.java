@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.NoSuchElementException;
 import java.util.logging.FileHandler;
-import java.util.logging.Level;
 import java.util.logging.SimpleFormatter;
 
 /**
@@ -121,11 +120,7 @@ public class Resort implements ServiceableResort {
             logger.info(String.format("\n%5s %10s %15s %15s %15s %15s %15s %15s %15s",
                     roomNumber,roomType,name_customer,id,phone,roomStatus,checkIn,checkOut,price));
 
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } catch (SecurityException ex) {
-            ex.printStackTrace();
-        }
+        } catch (IOException | SecurityException ex) {}
 
     }
 
