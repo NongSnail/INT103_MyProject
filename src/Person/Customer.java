@@ -20,6 +20,7 @@ public class Customer {
        this.phoneNumber = phoneNumber;
    }
 
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

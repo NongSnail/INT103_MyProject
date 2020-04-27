@@ -14,8 +14,6 @@ public class Room implements Price {
     private LocalDateTime checkout;
     private double price;
 
-
-
     private class dateComparator implements Comparable<LocalDateTime> {
 
         @Override
