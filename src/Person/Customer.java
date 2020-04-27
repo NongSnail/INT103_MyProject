@@ -10,16 +10,28 @@ package Person;
  * @author User
  */
 public class Customer {
-   private long idCard;
-   private String name;
-   private long phoneNumber;
 
-   public Customer(long idCard, String name, long phoneNumber){
-       this.idCard = idCard;
-       this.name = name;
-       this.phoneNumber = phoneNumber;
-   }
+    private long idCard;
+    private String name;
+    private long phoneNumber;
 
+    public Customer(long idCard, String name, long phoneNumber) {
+        this.idCard = idCard;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public long getIdCard() {
+        return idCard;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
 
     @Override
     public boolean equals(Object obj) {

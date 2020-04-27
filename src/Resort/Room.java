@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class Room implements Price {
+
     private int roomNumber;
     private RoomType roomType;
     private RoomStatus roomStatus;
@@ -48,9 +49,9 @@ public class Room implements Price {
 
     private double calculatePrice() {
         if (roomType == RoomType.SINGLE) {
-            return price = ((checkIn.until(checkout, ChronoUnit.DAYS)) * SINGLE_ROOM_PRICE)*VAT;
+            return price = ((checkIn.until(checkout, ChronoUnit.DAYS)) * SINGLE_ROOM_PRICE) * VAT;
         }
-        return price = ((checkIn.until(checkout, ChronoUnit.DAYS)) * DOUBLE_ROOM_PRICE)*VAT ;
+        return price = ((checkIn.until(checkout, ChronoUnit.DAYS)) * DOUBLE_ROOM_PRICE) * VAT;
     }
 
     public void resetRoom() {
@@ -80,6 +81,14 @@ public class Room implements Price {
 
     public double getPrice() {
         return price;
+    }
+
+    public LocalDateTime getCheckIn() {
+        return checkIn;
+    }
+
+    public LocalDateTime getCheckout() {
+        return checkout;
     }
 
     @Override
