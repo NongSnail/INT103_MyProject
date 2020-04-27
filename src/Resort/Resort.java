@@ -87,12 +87,23 @@ public class Resort implements ServiceableResort {
         return -1;
     }
 
-    public void logHistory() {
+    public void logHistory(Room r) {
         String filename = String.format("log_history/%s.log", LocalDate.now().format(
                 DateTimeFormatter.ofPattern("yyyy_MM_dd")
         ));
         //////////////////////////////////////////////////////////////////////////////
         System.setProperty("java.util.logging.SimpleFormatter.format", "%5$s");
+        //////////////////////////////////////////////////////////////////////////////
+        long id = r.getCustomer().getIdCard();
+        String name_customer = r.getCustomer().getName();
+        long phone = r.getCustomer().getPhoneNumber();
+
+        int roomNumber = r.getRoomNumber();
+        RoomType roomType = r.getRoomType();
+        RoomStatus roomStatus = r.getRoomStatus();
+        LocalDateTime checkIn = r.getCheckIn();
+        LocalDateTime checkOut = r.getCheckout();
+        double price = r.getPrice();
         //////////////////////////////////////////////////////////////////////////////
         FileHandler fh;
         try {
@@ -105,6 +116,10 @@ public class Resort implements ServiceableResort {
             if (!checkHeader(filename)) {
                 logger.info(getHeader());
             }
+            
+             //log here
+            logger.info(String.format("\n%5s %10s %15s %15s %15s %15s %15s %15s %15s",
+                    roomNumber,roomType,name_customer,id,phone,roomStatus,checkIn,checkOut,price));
 
         } catch (IOException ex) {
             ex.printStackTrace();
