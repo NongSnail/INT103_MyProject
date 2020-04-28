@@ -1,4 +1,5 @@
 
+import Person.Customer;
 import java.util.Scanner;
 
 /*
@@ -95,16 +96,19 @@ public class MainMenu {
     public void checkIn() {
         System.out.println("-----------------------------------------------------");
         System.out.println("{ CheckIn }");
-        System.out.println("Enter room number : ");
-        int roomNumber = sc.nextInt();
-        //หาห้อง
         System.out.println("Customer name : ");
         String cName = sc.nextLine();
         System.out.println("Customer ID card : ");
         long idCard = sc.nextLong();
         System.out.println("Phone number : ");
         long phoneNumber = sc.nextLong();
-        //add Customer //addroom 
+        Customer c = new Customer(idCard,cName,phoneNumber);
+        
+               
+        System.out.println("Enter room number : ");
+        int roomNumber = sc.nextInt();
+        
+
 
     }
 

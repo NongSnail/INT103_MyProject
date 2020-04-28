@@ -31,8 +31,6 @@ public class Resort implements ServiceableResort {
     private Room rooms[];
     private Logger resortLogger;
 
-    public Resort() {
-    }
 
     public Resort(String resortName, Administrator admin, int maximumRoom) {
         this.resortName = resortName;
@@ -49,7 +47,7 @@ public class Resort implements ServiceableResort {
             return false;
         }
         rooms[roomIndex].checkIn(c);
-        logHistory(); // need to handle IOException // to log history
+        logHistory(rooms[roomIndex]); // need to handle IOException // to log history
         return true;
     }
 
@@ -61,7 +59,7 @@ public class Resort implements ServiceableResort {
             return false;
         }
         rooms[roomIndex].checkout();
-        logHistory(); // need to handle IOException // to losg history
+        logHistory(rooms[roomIndex]); // need to handle IOException // to losg history
         rooms[roomIndex].resetRoom();
         return true;
     }
