@@ -23,7 +23,9 @@ public class MainMenu {
 
     public void systemLogin() {
         while (loginScreen() == false) {
-            unableLogIn();
+            System.out.println("-----------------------------------------------------");
+            System.out.println("The Id or password you entered is incorrect.");
+            System.out.println("-----------------------------------------------------");
         }
     }
 
@@ -39,12 +41,6 @@ public class MainMenu {
         return false;
     }
 
-    private void unableLogIn() {
-        System.out.println("-----------------------------------------------------");
-        System.out.println("The Id or password you entered is incorrect.");
-        System.out.println("-----------------------------------------------------");
-    }
-
     public void display() {
         System.out.println("▒▒▒▒▒▒▒╬ 【Resort Manager System】 ╬▒▒▒▒▒▒▒▒");
         System.out.println("   【 MainMenu 】");
@@ -57,30 +53,32 @@ public class MainMenu {
         System.out.println("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒");
         System.out.println("Enter Your Menu [1‐4]: ");
         selectedChoice = Integer.parseInt(sc.nextLine());
+        go();
     }
 
     public void go() {
-        switch (selectedChoice) {
-            case 1:
-                checkIn();
-                break;
-            case 2:
-                checkout();
-                break;
-            case 3:
-                listRoom();
-                break;
-            case 4:
-                resetPassword();
-                break;
-            case 5:
-                exit(0);
-                break;
-            default:
-                System.out.println("-------------------------------------------------------------");
-                System.out.println("Please type again..  QwQ ");
-        }
-
+        do {
+            switch (selectedChoice) {
+                case 1:
+                    checkIn();
+                    break;
+                case 2:
+                    checkout();
+                    break;
+                case 3:
+                    listRoom();
+                    break;
+                case 4:
+                    resetPassword();
+                    break;
+                case 5:
+                    exit(0);
+                    break;
+                default:
+                    System.out.println("-------------------------------------------------------------");
+                    System.out.println("Please type again..  QwQ ");
+            }
+        } while (selectedChoice != 5);
     }
 
     public int getSelectedChoice() {
@@ -125,12 +123,23 @@ public class MainMenu {
     }
 
     private boolean resetPassword() {
-        System.out.println("Enter your current password : ");
-        String currentpwd = sc.nextLine();
-        System.out.println("Enter your new password : ");
-        String newpwd = sc.nextLine();
-        System.out.println("Enter your new password(again) : ");
-        String newpwd2 = sc.nextLine();
+        String currentpwd;
+        do {
+            System.out.println("Enter your current password : ");
+            currentpwd = sc.nextLine();
+        } while (currentpwd.equals(""));
+
+        String newpwd;
+        do {
+            System.out.println("Enter your new password(again) : ");
+            newpwd = sc.nextLine();
+        } while (newpwd.equals(""));
+
+        String newpwd2;
+        do {
+            System.out.println("Enter your new password : ");
+            newpwd2 = sc.nextLine();
+        } while (newpwd2.equals(""));
 
         if (currentpwd.equals(pwdResort) == false) {
             System.out.println("The your current password is incorrect.");
