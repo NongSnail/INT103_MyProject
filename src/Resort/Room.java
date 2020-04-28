@@ -32,7 +32,11 @@ public class Room implements Price {
     public Room(Room r) {
         this.roomNumber = r.roomNumber;
         this.roomType = r.roomType;
-        // need to add more setter for logging purpose(to copy object)
+        this.roomStatus = r.roomStatus;
+        this.customer = r.customer;
+        this.checkIn = r.checkIn;
+        this.checkout = r.checkout;
+        this.price = r.price;
     }
 
     public void checkIn(Customer c) {
@@ -44,14 +48,14 @@ public class Room implements Price {
     public void checkout() {
         roomStatus = RoomStatus.AVAILABLE;
         checkout = LocalDateTime.now();
-        price = calculatePrice();
+        calculatePrice();
     }
 
     private double calculatePrice() {
         if (roomType == RoomType.SINGLE) {
-            return price = ((checkIn.until(checkout, ChronoUnit.DAYS)) * SINGLE_ROOM_PRICE) * VAT;
+            return price = ((checkIn.until(checkout, ChronoUnit.DAYS)) * SINGLE_ROOM_PRICE) * (1 + VAT);
         }
-        return price = ((checkIn.until(checkout, ChronoUnit.DAYS)) * DOUBLE_ROOM_PRICE) * VAT;
+        return price = ((checkIn.until(checkout, ChronoUnit.DAYS)) * DOUBLE_ROOM_PRICE) * (1 + VAT);
     }
 
     public void resetRoom() {
@@ -60,7 +64,6 @@ public class Room implements Price {
         checkIn = null;
         checkout = null;
         price = 0;
-        // need more null setter to clean all data
     }
 
     public int getRoomNumber() {
