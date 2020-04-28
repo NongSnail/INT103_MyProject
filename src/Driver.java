@@ -14,8 +14,7 @@ public class Driver {
 
         MainMenu m1 = new MainMenu();
             m1.systemLogin();
-            m1.display();
-            
+            m1.go();
         
     }
 }

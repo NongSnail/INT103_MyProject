@@ -53,11 +53,12 @@ public class MainMenu {
         System.out.println("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒");
         System.out.println("Enter Your Menu [1‐4]: ");
         selectedChoice = Integer.parseInt(sc.nextLine());
-        go();
+       
     }
 
     public void go() {
         do {
+            display();
             switch (selectedChoice) {
                 case 1:
                     checkIn();
@@ -123,33 +124,42 @@ public class MainMenu {
     }
 
     private boolean resetPassword() {
+////        currend password
         String currentpwd;
         do {
             System.out.println("Enter your current password : ");
             currentpwd = sc.nextLine();
+            System.out.println(currentpwd);
         } while (currentpwd.equals(""));
-
+//      new password
         String newpwd;
         do {
-            System.out.println("Enter your new password(again) : ");
+            System.out.println("Enter your new password : ");
             newpwd = sc.nextLine();
+            System.out.println(newpwd);
         } while (newpwd.equals(""));
+//      repeat password
 
         String newpwd2;
         do {
-            System.out.println("Enter your new password : ");
+            System.out.println("Enter your new password (again) : ");
             newpwd2 = sc.nextLine();
+            System.out.println(newpwd2);
         } while (newpwd2.equals(""));
 
         if (currentpwd.equals(pwdResort) == false) {
+            System.out.println("--------------------------------------");
             System.out.println("The your current password is incorrect.");
+            System.out.println("--------------------------------------");
             return false;
         }
         if (newpwd.equals(newpwd2) == false) {
+            System.out.println("--------------------------------------");
             System.out.println("Please enter same value again");
+            System.out.println("--------------------------------------");
             return false;
         }
-//        if condition is true then we can reset passsword.
+//      if condition is true then we can reset passsword.
         pwdResort = newpwd2;
         return true;
     }
