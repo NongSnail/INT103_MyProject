@@ -9,11 +9,13 @@
  * @author User
  */
 public class Driver {
+
     public static void main(String[] args) {
 
         MainMenu m1 = new MainMenu();
-         m1.display();
-         m1.go();;
-         
+            m1.systemLogin();
+            m1.display();
+            m1.go();
+        
     }
 }
