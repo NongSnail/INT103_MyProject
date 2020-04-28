@@ -14,6 +14,7 @@ public class Room implements Price {
     private LocalDateTime checkIn;
     private LocalDateTime checkout;
     private double price;
+    public static int total;
 
     private class dateComparator implements Comparable<LocalDateTime> {
 
@@ -26,6 +27,13 @@ public class Room implements Price {
 
     public Room(int number) {
         this.roomNumber = number;
+        this.roomType = RoomType.SINGLE;
+        roomStatus = RoomStatus.AVAILABLE;
+    }
+
+    public Room(int number, RoomType rt) {
+        this.roomNumber = number;
+        this.roomType = rt;
         roomStatus = RoomStatus.AVAILABLE;
     }
 

@@ -30,6 +30,7 @@ public class Resort implements ServiceableResort {
     private Administrator admin;
     private Room rooms[];
     private Logger resortLogger;
+    private int head;
 
 
     public Resort(String resortName, Administrator admin, int maximumRoom) {
@@ -37,6 +38,14 @@ public class Resort implements ServiceableResort {
         this.rooms = new Room[maximumRoom];
         this.customers = new Customer[maximumRoom];
         this.admin = admin;
+    }
+    
+    public boolean buildRoom(RoomType rt){
+        if (head < rooms.length) {
+            Room r = new Room(++Room.total,rt);
+            rooms[head++] = r;
+            return true;
+        } return false;
     }
 
     @Override
@@ -83,6 +92,11 @@ public class Resort implements ServiceableResort {
         }
         return -1;
     }
+
+    public Room[] getRooms() {
+        return rooms;
+    }
+    
 
     public void logHistory(Room r) {
         String filename = String.format("log_history/%s.log", LocalDate.now().format(
