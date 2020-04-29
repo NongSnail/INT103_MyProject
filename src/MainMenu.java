@@ -25,28 +25,29 @@ public class MainMenu {
 
     private int selectedChoice;
     private String idResort = "admin";
-    private char[] pwdResort =  {'1','2','3'};
+    // private char[] pwdResort = { '1', '2', '3' };
+    private String pwdResort = "123";
     private Console console;
 
     private Scanner sc;
     private Resort resort;
     private Room room;
-    
-    private final String resortName ="LuLu the cat";
+
+    private final String resortName = "LuLu the cat";
     private final int max = 10;
-    private final int NumberOfRoom_SINGLE = 5 ;
-    private final int NumberOfRoom_DOUBLE = 5 ;
+    private final int NumberOfRoom_SINGLE = 5;
+    private final int NumberOfRoom_DOUBLE = 5;
 
     public MainMenu() {
         this.console = System.console();
         this.sc = new Scanner(System.in);
-        Administrator admin1 = new Administrator("1112","LuLu");
+        Administrator admin1 = new Administrator("1112", "LuLu");
         resort = new Resort(resortName, admin1, max);
-        
+
         for (int i = 0; i <= NumberOfRoom_SINGLE; i++) {
             resort.buildRoom(RoomType.SINGLE);
         }
-        
+
         for (int i = 0; i <= NumberOfRoom_SINGLE; i++) {
             resort.buildRoom(RoomType.DOUBLE);
         }
@@ -62,14 +63,15 @@ public class MainMenu {
     }
 
     private boolean loginScreen() {
- 
+
         System.out.println("▒▒▒▒▒▒▒╬ 【Authentication】 ╬▒▒▒▒▒▒▒▒");
         System.out.print("Username : ");
         String id = sc.nextLine();
-        char[] pwd = console.readPassword("%s", "Password : ");
-        // System.out.print("Password : ");
-        // String pwd = sc.nextLine();
-        if (id.equals(idResort) && Arrays.equals(pwd, pwdResort)) {
+        // char[] pwd = console.readPassword("%s", "Password : ");
+        System.out.print("Password : ");
+        String pwd = sc.nextLine();
+        // condition : Arrays.equals(pwd, pwdResort
+        if (id.equals(idResort) && pwd.equals(pwdResort)) {
             return true;
         }
         return false;
@@ -155,8 +157,8 @@ public class MainMenu {
         System.out.println("{ Checkout }");
         System.out.println("Enter room number : ");
         int roomNumber = sc.nextInt();
-        //show data
-        //agree?
+        // show data
+        // agree?
     }
 
     public void listRoom() {
@@ -168,58 +170,59 @@ public class MainMenu {
             if (rs[i] == null) {
                 break;
             }
-            System.out.println(String.format("%5s %15s %15s", rs[i].getRoomNumber(),
-                    rs[i].getRoomType().toString(), rs[i].getRoomStatus()));
-            
+            System.out.println(String.format("%5s %15s %15s", rs[i].getRoomNumber(), rs[i].getRoomType().toString(),
+                    rs[i].getRoomStatus()));
+
         }
-            System.out.println("-----------------------------------------------------");
-            System.out.println("");
-            System.out.println("");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("");
+        System.out.println("");
     }
 
     private boolean resetPassword() {
 
-        // String currentpwd;
-        char[] currentpwd;
+        String currentpwd;
+        // char[] currentpwd;
+        
         do {
-            currentpwd = console.readPassword("%s", "Enter your currsent password : ");
-            // System.out.println("Enter your current password : ");
-            // currentpwd = sc.nextLine();
+            // currentpwd = console.readPassword("%s", "Enter your currsent password : ");
+            System.out.println("Enter your current password : ");
+            currentpwd = sc.nextLine();
         } while (currentpwd.equals(""));
 
-        // String newpwd;
-        char[] newpwd;
+        String newpwd;
+        // char[] newpwd;
         do {
-            newpwd = console.readPassword("%s", "Enter your new password : ");
-            // System.out.println("Enter your new password : ");
-            // newpwd = sc.nextLine();
+            // newpwd = console.readPassword("%s", "Enter your new password : ");
+            System.out.println("Enter your new password : ");
+            newpwd = sc.nextLine();
         } while (newpwd.equals(""));
 
-
-        // String newpwd2;
-        char[] newpwd2;
+        String newpwd2;
+        // char[] newpwd2;
         do {
-            newpwd2 = console.readPassword("%s","Enter your new password (again) : ");
-            // System.out.println("Enter your new password (again) : ");
-            // newpwd2 = sc.nextLine();
+            // newpwd2 = console.readPassword("%s", "Enter your new password (again) : ");
+            System.out.println("Enter your new password (again) : ");
+            newpwd2 = sc.nextLine();
         } while (newpwd2.equals(""));
-
-        if (!Arrays.equals(currentpwd, pwdResort)) {
+        //condition !Arrays.equals(currentpwd, pwdResort)
+        if (currentpwd.equals(pwdResort)) {
             System.out.println("--------------------------------------");
             System.out.println("The your current password is incorrect.");
             System.out.println("--------------------------------------");
             return false;
         }
-        if (!Arrays.equals(newpwd, newpwd2)) {
+        // condition !Arrays.equals(newpwd, newpwd2)
+        if (newpwd.equals(newpwd2)) {
             System.out.println("--------------------------------------");
             System.out.println("Please enter same value again");
             System.out.println("--------------------------------------");
             return false;
         }
-//      if condition is true then we can reset passsword.
-            System.out.println("--------------------------------------");
-            System.out.println("UPDATE PASSWORD");
-            System.out.println("--------------------------------------");
+        // if condition is true then we can reset passsword.
+        System.out.println("--------------------------------------");
+        System.out.println("UPDATE PASSWORD");
+        System.out.println("--------------------------------------");
         pwdResort = newpwd2;
         return true;
     }
