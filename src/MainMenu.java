@@ -23,12 +23,26 @@ public class MainMenu {
     private String pwdResort = "123";
     private Scanner sc;
     private Resort resort;
+    private Room room;
+    
+    private final String resortName ="LuLu the cat";
+    private final int max = 10;
+    private final int NumberOfRoom_SINGLE = 5 ;
+    private final int NumberOfRoom_DOUBLE = 5 ;
 
     public MainMenu() {
         this.sc = new Scanner(System.in);
         Administrator admin1 = new Administrator("1112","LuLu");
-        resort = new Resort("LuLu the cat", admin1, 5);
-        resort.buildRoom(RoomType.SINGLE);
+        resort = new Resort(resortName, admin1, max);
+        
+        for (int i = 0; i <= NumberOfRoom_SINGLE; i++) {
+            resort.buildRoom(RoomType.SINGLE);
+        }
+        
+        for (int i = 0; i <= NumberOfRoom_SINGLE; i++) {
+            resort.buildRoom(RoomType.DOUBLE);
+        }
+
     }
 
     public void systemLogin() {
@@ -144,10 +158,13 @@ public class MainMenu {
             if (rs[i] == null) {
                 break;
             }
-            System.out.println(String.format("%5s %10s %10s", rs[i].getRoomNumber(),
+            System.out.println(String.format("%5s %15s %15s", rs[i].getRoomNumber(),
                     rs[i].getRoomType().toString(), rs[i].getRoomStatus()));
-            System.out.println("");
+            
         }
+            System.out.println("-----------------------------------------------------");
+            System.out.println("");
+            System.out.println("");
     }
 
     private boolean resetPassword() {

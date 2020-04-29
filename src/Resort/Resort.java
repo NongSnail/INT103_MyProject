@@ -40,6 +40,7 @@ public class Resort implements ServiceableResort {
         this.admin = admin;
     }
     
+    
     public boolean buildRoom(RoomType rt){
         if (head < rooms.length) {
             Room r = new Room(++Room.total,rt);
@@ -114,7 +115,10 @@ public class Resort implements ServiceableResort {
         RoomStatus roomStatus = r.getRoomStatus();
         LocalDateTime checkIn = r.getCheckIn();
         LocalDateTime checkOut = r.getCheckout();
-        double price = r.getPrice();
+        double price = r.getPrice();    
+        
+
+              
         //////////////////////////////////////////////////////////////////////////////
         FileHandler fh;
         try {
@@ -127,9 +131,10 @@ public class Resort implements ServiceableResort {
             if (!checkHeader(filename)) {
                 logger.info(getHeader());
             }
-            
+            System.out.println(String.format("\n%5s %10s %15s %15s %15s %15s %15s %15s %15s",
+                        "Room_Number", "Room_Type", "Customer_Name", "IDCard", "Phone", "Status", "CheckIn", "CheckOut", "Price"));
              //log here
-            logger.info(String.format("\n%5s %10s %15s %15s %15s %15s %15s %15s %15s",
+            logger.info(String.format("\n%5s %15s %15s %15s %18s %15s %15s %15s %15",
                     roomNumber,roomType,name_customer,id,phone,roomStatus,checkIn,checkOut,price));
 
         } catch (IOException | SecurityException ex) {}
