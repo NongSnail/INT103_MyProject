@@ -4,8 +4,13 @@ import Person.Customer;
 import Resort.Resort;
 import Resort.Room;
 import Resort.RoomType;
+
+import java.io.Console;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
+
+import javax.sound.sampled.SourceDataLine;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,7 +25,9 @@ public class MainMenu {
 
     private int selectedChoice;
     private String idResort = "admin";
-    private String pwdResort = "123";
+    private char[] pwdResort =  {'1','2','3'};
+    private Console console;
+
     private Scanner sc;
     private Resort resort;
     private Room room;
@@ -31,6 +38,7 @@ public class MainMenu {
     private final int NumberOfRoom_DOUBLE = 5 ;
 
     public MainMenu() {
+        this.console = System.console();
         this.sc = new Scanner(System.in);
         Administrator admin1 = new Administrator("1112","LuLu");
         resort = new Resort(resortName, admin1, max);
@@ -54,12 +62,14 @@ public class MainMenu {
     }
 
     private boolean loginScreen() {
+ 
         System.out.println("▒▒▒▒▒▒▒╬ 【Authentication】 ╬▒▒▒▒▒▒▒▒");
         System.out.print("Username : ");
         String id = sc.nextLine();
-        System.out.print("Password : ");
-        String pwd = sc.nextLine();
-        if (id.equals(idResort) && pwd.equals(pwdResort)) {
+        char[] pwd = console.readPassword("%s", "Password : ");
+        // System.out.print("Password : ");
+        // String pwd = sc.nextLine();
+        if (id.equals(idResort) && Arrays.equals(pwd, pwdResort)) {
             return true;
         }
         return false;
@@ -168,39 +178,48 @@ public class MainMenu {
     }
 
     private boolean resetPassword() {
-//        currend password
-        String currentpwd;
-        do {
-            System.out.println("Enter your current password : ");
-            currentpwd = sc.nextLine();
-        } while (currentpwd.equals(""));
-//      new password
-        String newpwd;
-        do {
-            System.out.println("Enter your new password : ");
-            newpwd = sc.nextLine();
-        } while (newpwd.equals(""));
-//      repeat password
 
-        String newpwd2;
+        // String currentpwd;
+        char[] currentpwd;
         do {
-            System.out.println("Enter your new password (again) : ");
-            newpwd2 = sc.nextLine();
+            currentpwd = console.readPassword("%s", "Enter your currsent password : ");
+            // System.out.println("Enter your current password : ");
+            // currentpwd = sc.nextLine();
+        } while (currentpwd.equals(""));
+
+        // String newpwd;
+        char[] newpwd;
+        do {
+            newpwd = console.readPassword("%s", "Enter your new password : ");
+            // System.out.println("Enter your new password : ");
+            // newpwd = sc.nextLine();
+        } while (newpwd.equals(""));
+
+
+        // String newpwd2;
+        char[] newpwd2;
+        do {
+            newpwd2 = console.readPassword("%s","Enter your new password (again) : ");
+            // System.out.println("Enter your new password (again) : ");
+            // newpwd2 = sc.nextLine();
         } while (newpwd2.equals(""));
 
-        if (currentpwd.equals(pwdResort) == false) {
+        if (!Arrays.equals(currentpwd, pwdResort)) {
             System.out.println("--------------------------------------");
             System.out.println("The your current password is incorrect.");
             System.out.println("--------------------------------------");
             return false;
         }
-        if (newpwd.equals(newpwd2) == false) {
+        if (!Arrays.equals(newpwd, newpwd2)) {
             System.out.println("--------------------------------------");
             System.out.println("Please enter same value again");
             System.out.println("--------------------------------------");
             return false;
         }
 //      if condition is true then we can reset passsword.
+            System.out.println("--------------------------------------");
+            System.out.println("UPDATE PASSWORD");
+            System.out.println("--------------------------------------");
         pwdResort = newpwd2;
         return true;
     }
