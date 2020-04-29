@@ -32,21 +32,20 @@ public class Resort implements ServiceableResort {
     private Logger resortLogger;
     private int head;
 
-
     public Resort(String resortName, Administrator admin, int maximumRoom) {
         this.resortName = resortName;
         this.rooms = new Room[maximumRoom];
         this.customers = new Customer[maximumRoom];
         this.admin = admin;
     }
-    
-    
-    public boolean buildRoom(RoomType rt){
+
+    public boolean buildRoom(RoomType rt) {
         if (head < rooms.length) {
-            Room r = new Room(++Room.total,rt);
+            Room r = new Room(++Room.total, rt);
             rooms[head++] = r;
             return true;
-        } return false;
+        }
+        return false;
     }
 
     @Override
@@ -97,8 +96,8 @@ public class Resort implements ServiceableResort {
     public Room[] getRooms() {
         return rooms;
     }
-    
-    String format = "\n|%1$-15s|%2$-10s|%3$-15s|%4$-15s|%5$-15s|%6$-15s|%7$-28s|%8$-28s|%9$-15s|";
+
+    String format = "\n%1$-12s %2$-10s %3$-15s %4$-15s %5$-15s %6$-15s %7$-28s %8$-28s %9$-15s";
 
     public void logHistory(Room r) {
         String filename = String.format("log_history/%s.log", LocalDate.now().format(
@@ -116,8 +115,16 @@ public class Resort implements ServiceableResort {
         RoomStatus roomStatus = r.getRoomStatus();
         LocalDateTime checkIn = r.getCheckIn();
         LocalDateTime checkOut = r.getCheckout();
-        double price = r.getPrice();    
+        double price = r.getPrice();
 
+        String checkInStr = checkIn.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss a"));
+        String checkOutStr;
+        if(checkOut==null){
+            checkOutStr = "-"; 
+        } else {
+            checkOutStr = checkOut.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss a"));
+        }
+        
         //////////////////////////////////////////////////////////////////////////////
         FileHandler fh;
         try {
@@ -130,14 +137,15 @@ public class Resort implements ServiceableResort {
             if (!checkHeader(filename)) {
                 logger.info(getHeader());
             } else {
-                 System.out.println(String.format(format,
+                System.out.println(String.format(format,
                         "Room_Number", "Room_Type", "Customer_Name", "IDCard", "Phone", "Status", "CheckIn", "CheckOut", "Price"));
             }
-             //log here
+            //log here
             logger.info(String.format(format,
-                    roomNumber,roomType,name_customer,id,phone,roomStatus,checkIn,checkOut,price));
+                    roomNumber, roomType, name_customer, id, phone, roomStatus, checkInStr , checkOutStr , price));
 
-        } catch (IOException | SecurityException ex) {}
+        } catch (IOException | SecurityException ex) {
+        }
 
     }
 
@@ -145,7 +153,7 @@ public class Resort implements ServiceableResort {
         LocalDate day = LocalDate.now();
         return "Record history"
                 + "\n----------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-                + String.format("\n|%1$-15s|%2$-10s|%3$-15s|%4$-15s|%5$-15s|%6$-15s|%7$-28s|%8$-28s|%9$-15s|",
+                + String.format("\n%1$-12s %2$-10s %3$-15s %4$-15s %5$-15s %6$-15s %7$-28s %8$-28s %9$-15s",
                         "Room_Number", "Room_Type", "Customer_Name", "IDCard", "Phone", "Status", "CheckIn", "CheckOut", "Price")
                 + "\n----------------------------------------------------------------------------------------------------------------------------------------------------------------------";
     }
