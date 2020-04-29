@@ -168,19 +168,17 @@ public class MainMenu {
     }
 
     private boolean resetPassword() {
-////        currend password
+//        currend password
         String currentpwd;
         do {
             System.out.println("Enter your current password : ");
             currentpwd = sc.nextLine();
-            System.out.println(currentpwd);
         } while (currentpwd.equals(""));
 //      new password
         String newpwd;
         do {
             System.out.println("Enter your new password : ");
             newpwd = sc.nextLine();
-            System.out.println(newpwd);
         } while (newpwd.equals(""));
 //      repeat password
 
@@ -188,7 +186,6 @@ public class MainMenu {
         do {
             System.out.println("Enter your new password (again) : ");
             newpwd2 = sc.nextLine();
-            System.out.println(newpwd2);
         } while (newpwd2.equals(""));
 
         if (currentpwd.equals(pwdResort) == false) {
