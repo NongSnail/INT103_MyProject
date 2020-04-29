@@ -44,11 +44,11 @@ public class MainMenu {
         Administrator admin1 = new Administrator("1112", "LuLu");
         resort = new Resort(resortName, admin1, max);
 
-        for (int i = 0; i <= NumberOfRoom_SINGLE; i++) {
+        for (int i = 1; i <= NumberOfRoom_SINGLE; i++) {
             resort.buildRoom(RoomType.SINGLE);
         }
 
-        for (int i = 0; i <= NumberOfRoom_SINGLE; i++) {
+        for (int i = 1; i <= NumberOfRoom_DOUBLE; i++) {
             resort.buildRoom(RoomType.DOUBLE);
         }
 
@@ -87,7 +87,7 @@ public class MainMenu {
         System.out.println("《4》reset password");
         System.out.println("《5》exit");
         System.out.println("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒");
-        System.out.println("Enter Your Menu [1‐4]: ");
+        System.out.print("Enter Your Menu [1‐4]: ");
         selectedChoice = Integer.parseInt(sc.nextLine());
 
     }
@@ -137,11 +137,11 @@ public class MainMenu {
         int number = resort.findForSpecifiedRoom(roomNumber);
         if (number != -1) {
             System.out.println("CheckIn Room Number " + roomNumber);
-            System.out.println("Customer name : ");
+            System.out.print("Customer name : ");
             String cName = sc.nextLine();
-            System.out.println("Customer ID card : ");
+            System.out.print("Customer ID card : ");
             long idCard = Long.parseLong(sc.nextLine());
-            System.out.println("Phone number : ");
+            System.out.print("Phone number : ");
             long phoneNumber = Long.parseLong(sc.nextLine());
             Customer c = new Customer(idCard, cName, phoneNumber);
             RoomType t = RoomType.SINGLE;
@@ -155,7 +155,7 @@ public class MainMenu {
     public void checkout() {
         System.out.println("-----------------------------------------------------");
         System.out.println("{ Checkout }");
-        System.out.println("Enter room number : ");
+        System.out.print("Enter room number : ");
         int roomNumber = sc.nextInt();
         // show data
         // agree?

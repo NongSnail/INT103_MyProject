@@ -150,7 +150,6 @@ public class Resort implements ServiceableResort {
     }
 
     public static String getHeader() {
-        LocalDate day = LocalDate.now();
         return "Record history"
                 + "\n----------------------------------------------------------------------------------------------------------------------------------------------------------------------"
                 + String.format("\n%1$-12s %2$-10s %3$-15s %4$-15s %5$-15s %6$-15s %7$-28s %8$-28s %9$-15s",
