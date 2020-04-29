@@ -6,8 +6,6 @@ import Resort.Room;
 import Resort.RoomType;
 
 import java.io.Console;
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 import javax.sound.sampled.SourceDataLine;
@@ -63,7 +61,6 @@ public class MainMenu {
     }
 
     private boolean loginScreen() {
-
         System.out.println("▒▒▒▒▒▒▒╬ 【Authentication】 ╬▒▒▒▒▒▒▒▒");
         System.out.print("Username : ");
         String id = sc.nextLine();
@@ -133,19 +130,30 @@ public class MainMenu {
         System.out.println("{ CheckIn }");
         System.out.print("Enter room number : ");
         int roomNumber = Integer.parseInt(sc.nextLine());
-        System.out.println(roomNumber);
         int number = resort.findForSpecifiedRoom(roomNumber);
         if (number != -1) {
-            System.out.println("CheckIn Room Number " + roomNumber);
-            System.out.print("Customer name : ");
+            System.out.println("---[ CheckIn Room Number " + roomNumber +" ]--");
+            System.out.print("Customer Name : ");
             String cName = sc.nextLine();
             System.out.print("Customer ID card : ");
             long idCard = Long.parseLong(sc.nextLine());
             System.out.print("Phone number : ");
             long phoneNumber = Long.parseLong(sc.nextLine());
+            System.out.println("---[ Confirm information ]---");
+            System.out.println("Room Number : "+roomNumber);
+            System.out.println("{Customer}");
+            System.out.println("  Name : "+ cName + "  ID card : "+idCard+"  Phone : "+ phoneNumber);
+//            String case
+//                switch(){
+//                case y :
+//                break;
+//                case n :
+//                break;
+//                default:
+//                }
             Customer c = new Customer(idCard, cName, phoneNumber);
-            RoomType t = RoomType.SINGLE;
-            resort.checkIn(c, t);
+            //RoomType t = resort.getSpecifiedRoom(number).getRoomType();
+            resort.checkIn(c, roomNumber);
         } else {
             System.out.println("no data.");
         }
@@ -156,9 +164,21 @@ public class MainMenu {
         System.out.println("-----------------------------------------------------");
         System.out.println("{ Checkout }");
         System.out.print("Enter room number : ");
-        int roomNumber = sc.nextInt();
-        // show data
-        // agree?
+        int roomNumber = Integer.parseInt(sc.nextLine());
+        int number = resort.findForSpecifiedRoom(roomNumber);
+        long idCard = resort.getSpecifiedRoom(number).getCustomer().getIdCard();
+        String cName = resort.getSpecifiedRoom(number).getCustomer().getName();
+        long phoneNumber = resort.getSpecifiedRoom(number).getCustomer().getPhoneNumber();
+        
+        System.out.println("---[ Confirm information ]---");
+        System.out.println("Room Number : "+roomNumber);
+        System.out.println("{Customer}");
+        System.out.println("ID card : "+idCard+" Name : "+ cName +"Phone : "+ phoneNumber);
+        System.out.println("Need to CheckOut? (Y/N)");
+        Customer c = resort.getSpecifiedRoom(number).getCustomer();
+        resort.checkOut(c, roomNumber);
+ 
+
     }
 
     public void listRoom() {
@@ -226,5 +246,10 @@ public class MainMenu {
         pwdResort = newpwd2;
         return true;
     }
-
+    
+//    
+//    public void backToMainMenu(){
+//        System.out.println("Return to the menu page");
+//    }
+    
 }

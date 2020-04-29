@@ -60,6 +60,19 @@ public class Resort implements ServiceableResort {
         return true;
     }
 
+    public boolean checkIn(Customer c,int r) {
+        int roomIndex = findForSpecifiedRoom(r); 
+        if (roomIndex == -1 || c == null) {
+            System.out.println(r);
+            System.out.println("===");
+            return false;
+        }
+        System.out.println("+++");
+        rooms[roomIndex].checkIn(c);
+        logHistory(rooms[roomIndex]); 
+        return true;
+    }
+
     @Override
     public boolean checkOut(Customer c, int roomNumber) {
         int roomIndex = findForSpecifiedRoom(roomNumber); // set index for rooms[]
@@ -97,6 +110,10 @@ public class Resort implements ServiceableResort {
         return rooms;
     }
 
+    public Room getSpecifiedRoom(int i) {
+        return rooms[i];
+    }
+
     String format = "\n%1$-12s %2$-10s %3$-15s %4$-15s %5$-15s %6$-15s %7$-28s %8$-28s %9$-15s";
 
     public void logHistory(Room r) {
@@ -119,12 +136,12 @@ public class Resort implements ServiceableResort {
 
         String checkInStr = checkIn.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss a"));
         String checkOutStr;
-        if(checkOut==null){
-            checkOutStr = "-"; 
+        if (checkOut == null) {
+            checkOutStr = "-";
         } else {
             checkOutStr = checkOut.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss a"));
         }
-        
+
         //////////////////////////////////////////////////////////////////////////////
         FileHandler fh;
         try {
@@ -142,7 +159,7 @@ public class Resort implements ServiceableResort {
             }
             //log here
             logger.info(String.format(format,
-                    roomNumber, roomType, name_customer, id, phone, roomStatus, checkInStr , checkOutStr , price));
+                    roomNumber, roomType, name_customer, id, phone, roomStatus, checkInStr, checkOutStr, price));
 
         } catch (IOException | SecurityException ex) {
         }
