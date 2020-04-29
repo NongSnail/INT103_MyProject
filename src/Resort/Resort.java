@@ -98,6 +98,7 @@ public class Resort implements ServiceableResort {
         return rooms;
     }
     
+    String format = "\n|%1$-15s|%2$-10s|%3$-15s|%4$-15s|%5$-15s|%6$-15s|%7$-28s|%8$-28s|%9$-15s|";
 
     public void logHistory(Room r) {
         String filename = String.format("log_history/%s.log", LocalDate.now().format(
@@ -116,9 +117,7 @@ public class Resort implements ServiceableResort {
         LocalDateTime checkIn = r.getCheckIn();
         LocalDateTime checkOut = r.getCheckout();
         double price = r.getPrice();    
-        
 
-              
         //////////////////////////////////////////////////////////////////////////////
         FileHandler fh;
         try {
@@ -130,11 +129,12 @@ public class Resort implements ServiceableResort {
 
             if (!checkHeader(filename)) {
                 logger.info(getHeader());
-            }
-            System.out.println(String.format("\n%5s %10s %15s %15s %15s %15s %15s %15s %15s",
+            } else {
+                 System.out.println(String.format(format,
                         "Room_Number", "Room_Type", "Customer_Name", "IDCard", "Phone", "Status", "CheckIn", "CheckOut", "Price"));
+            }
              //log here
-            logger.info(String.format("\n%5s %15s %15s %15s %18s %15s %15s %15s %15",
+            logger.info(String.format(format,
                     roomNumber,roomType,name_customer,id,phone,roomStatus,checkIn,checkOut,price));
 
         } catch (IOException | SecurityException ex) {}
@@ -144,10 +144,10 @@ public class Resort implements ServiceableResort {
     public static String getHeader() {
         LocalDate day = LocalDate.now();
         return "Record history"
-                + "\n--------------------------------------------------------------------------------------------------------------------------------------------"
-                + String.format("\n%5s %10s %15s %15s %15s %15s %15s %15s %15s",
+                + "\n----------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+                + String.format("\n|%1$-15s|%2$-10s|%3$-15s|%4$-15s|%5$-15s|%6$-15s|%7$-28s|%8$-28s|%9$-15s|",
                         "Room_Number", "Room_Type", "Customer_Name", "IDCard", "Phone", "Status", "CheckIn", "CheckOut", "Price")
-                + "\n--------------------------------------------------------------------------------------------------------------------------------------------";
+                + "\n----------------------------------------------------------------------------------------------------------------------------------------------------------------------";
     }
 
     public static boolean checkHeader(String fileName) {
