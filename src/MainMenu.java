@@ -82,10 +82,10 @@ public class MainMenu {
         System.out.println("《3》List Room");
         System.out.println("《4》History");
         System.out.println("-----------------------------------------------------");
-        System.out.println("《4》reset password");
-        System.out.println("《5》exit");
+        System.out.println("《5》reset password");
+        System.out.println("《6》exit");
         System.out.println("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒");
-        System.out.print("Enter Your Menu [1‐4]: ");
+        System.out.print("Enter Your Menu [1‐5]: ");
         selectedChoice = inputInt();
 
     }
@@ -104,16 +104,18 @@ public class MainMenu {
                     listRoom();
                     break;
                 case 4:
-                    resetPassword();
+                    history();
                     break;
                 case 5:
-                    exit(0);
+                    resetPassword();
                     break;
+                case 6:
+                    exit(0);
                 default:
                     System.out.println("-------------------------------------------------------------");
                     System.out.println("Please type again..  QwQ ");
             }
-        } while (selectedChoice != 5);
+        } while (selectedChoice != 6);
     }
 
     public int getSelectedChoice() {
@@ -184,7 +186,7 @@ public class MainMenu {
             String s = sc.nextLine();
             if (s.equals("y")) {
                 Customer c = resort.getSpecifiedRoom(number).getCustomer();
-                resort.checkOut(c, roomNumber);
+                resort.checkout(c, roomNumber);
                 System.out.println(" [ Checkout Completed ]");
             } else if (s.equals("n")) {
                 break;
@@ -220,11 +222,24 @@ public class MainMenu {
         String currentpwd;
         // char[] currentpwd;
 
+        // [ current password checker ]
+        int currentPasswordInputCounter = 0;
         do {
             // currentpwd = console.readPassword("%s", "Enter your currsent password : ");
             System.out.println("Enter your current password : ");
             currentpwd = sc.nextLine();
-        } while (currentpwd.equals(""));
+            //condition !Arrays.equals(currentpwd, pwdResort)
+            if (!currentpwd.equals(pwdResort)) {
+                System.out.println("--------------------------------------");
+                System.out.println(" Your current password is incorrect.");
+                System.out.println("--------------------------------------");
+                currentPasswordInputCounter++;
+                if (currentPasswordInputCounter > 2) {
+                    System.out.println("!!! You have entered incorrect password too much. (more than 3 times) !!!");
+                    return false;
+                }
+            }
+        } while (!currentpwd.equals(pwdResort));
 
         String newpwd;
         // char[] newpwd;
@@ -237,30 +252,31 @@ public class MainMenu {
         String newpwd2;
         // char[] newpwd2;
         do {
-            // newpwd2 = console.readPassword("%s", "Enter your new password (again) : ");
-            System.out.println("Enter your new password (again) : ");
-            newpwd2 = sc.nextLine();
-        } while (newpwd2.equals(""));
-        //condition !Arrays.equals(currentpwd, pwdResort)
-        if (currentpwd.equals(pwdResort)) {
-            System.out.println("--------------------------------------");
-            System.out.println("The your current password is incorrect.");
-            System.out.println("--------------------------------------");
-            return false;
-        }
-        // condition !Arrays.equals(newpwd, newpwd2)
-        if (newpwd.equals(newpwd2)) {
-            System.out.println("--------------------------------------");
-            System.out.println("Please enter same value again");
-            System.out.println("--------------------------------------");
-            return false;
-        }
+            do {
+                // newpwd2 = console.readPassword("%s", "Enter your new password (again) : ");
+                System.out.println("Enter your new password (again) : ");
+                newpwd2 = sc.nextLine();
+            } while (newpwd2.equals(""));
+            
+            // condition !Arrays.equals(newpwd, newpwd2)
+            if (!newpwd.equals(newpwd2)) {
+                System.out.println("--------------------------------------");
+                System.out.println("  Please enter the same value again");
+                System.out.println("--------------------------------------");
+                return false;
+            }
+        } while (!newpwd.equals(newpwd2));
+        
         // if condition is true then we can reset passsword.
         System.out.println("--------------------------------------");
-        System.out.println("UPDATE PASSWORD");
+        System.out.println("     PASSWORD HAS BEEN UPDATED");
         System.out.println("--------------------------------------");
         pwdResort = newpwd2;
         return true;
+    }
+
+    public void history() {
+        // to show History of each day
     }
 
     public long inputLong() {
