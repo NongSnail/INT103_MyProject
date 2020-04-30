@@ -27,11 +27,9 @@ import java.util.logging.SimpleFormatter;
 public class Resort implements ServiceableResort {
 
     private String resortName;
-    private Customer customers[]; // This attribute hasn't been used OR Apply to Customer who checkIn? IF yes -> need more finder methods.
     private Administrator admin;
     private Room rooms[];
-    private Logger resortLogger;
-    private int head;
+    private int totalRoom;
 
     public Resort(String resortName, Administrator admin, int maximumRoom) {
         this.resortName = resortName;
@@ -41,36 +39,22 @@ public class Resort implements ServiceableResort {
     }
 
     public boolean buildRoom(RoomType rt) {
-        if (head < rooms.length) {
-            Room r = new Room(++Room.total, rt);
-            rooms[head++] = r;
+        if (totalRoom < rooms.length) {
+            rooms[totalRoom] = new Room(totalRoom++, rt);
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean checkIn(Customer c, RoomType t) {
-        int roomIndex = findForAvailableRoom(t); // set index for rooms[]
+    public boolean checkIn(Customer c,int roomNumber) {
+        int roomIndex = findForSpecifiedRoom(roomNumber); // set index for rooms[]
         // if no room available OR Customer == null
         if (roomIndex == -1 || c == null) {
             return false;
         }
         rooms[roomIndex].checkIn(c);
-        logHistory(rooms[roomIndex]); // need to handle IOException // to log history
-        return true;
-    }
-
-    public boolean checkIn(Customer c,int r) {
-        int roomIndex = findForSpecifiedRoom(r); 
-        if (roomIndex == -1 || c == null) {
-            System.out.println(r);
-            System.out.println("===");
-            return false;
-        }
-        System.out.println("+++");
-        rooms[roomIndex].checkIn(c);
-        logHistory(rooms[roomIndex]); 
+        logHistory(rooms[roomIndex]); // to log history
         return true;
     }
 
@@ -82,7 +66,7 @@ public class Resort implements ServiceableResort {
             return false;
         }
         rooms[roomIndex].checkout();
-        logHistory(rooms[roomIndex]); // need to handle IOException // to losg history
+        logHistory(rooms[roomIndex]); // to log history
         rooms[roomIndex].resetRoom();
         return true;
     }
