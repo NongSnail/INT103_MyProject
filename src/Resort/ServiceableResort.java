@@ -13,5 +13,5 @@ import Person.Customer;
  */
 public interface ServiceableResort {
     public boolean checkIn(Customer c,int roomNumber);
-    public boolean checkOut(Customer c, int roomNumber);
+    public boolean checkout(Customer c, int roomNumber);
 }

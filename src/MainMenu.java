@@ -77,7 +77,7 @@ public class MainMenu {
         System.out.println("▒▒▒▒▒▒▒╬ 【Resort Manager System】 ╬▒▒▒▒▒▒▒▒");
         System.out.println("   【 MainMenu 】");
         System.out.println("《1》CheckIn");
-        System.out.println("《2》CheckOut");
+        System.out.println("《2》Checkout");
         System.out.println("《3》List Room");
         System.out.println("-----------------------------------------------------");
         System.out.println("《4》reset password");

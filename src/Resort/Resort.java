@@ -58,7 +58,7 @@ public class Resort implements ServiceableResort {
     }
 
     @Override
-    public boolean checkOut(Customer c, int roomNumber) {
+    public boolean checkout(Customer c, int roomNumber) {
         int roomIndex = findForSpecifiedRoom(roomNumber); // set index for rooms[]
         // if roomNumber not found OR Customer == null OR Customer doesn't match with this rooom.
         if (roomIndex == -1 || c == null || !rooms[roomIndex].getCustomer().equals(c)) {
