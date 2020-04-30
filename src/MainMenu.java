@@ -6,6 +6,7 @@ import Resort.Room;
 import Resort.RoomType;
 
 import java.io.Console;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -79,12 +80,13 @@ public class MainMenu {
         System.out.println("《1》CheckIn");
         System.out.println("《2》Checkout");
         System.out.println("《3》List Room");
+        System.out.println("《4》History");
         System.out.println("-----------------------------------------------------");
         System.out.println("《4》reset password");
         System.out.println("《5》exit");
         System.out.println("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒");
         System.out.print("Enter Your Menu [1‐4]: ");
-        selectedChoice = Integer.parseInt(sc.nextLine());
+        selectedChoice = inputInt();
 
     }
 
@@ -128,16 +130,16 @@ public class MainMenu {
         System.out.println("-----------------------------------------------------");
         System.out.println("{ CheckIn }");
         System.out.print("Enter room number : ");
-        int roomNumber = Integer.parseInt(sc.nextLine());
+        int roomNumber = inputInt();
         int number = resort.findForSpecifiedRoom(roomNumber);
         if (number != -1) {
             System.out.println("-----------[ CheckIn At Room Number " + roomNumber + " ]-----------");
             System.out.print("Customer Name : ");
             String cName = sc.nextLine();
             System.out.print("Customer ID card : ");
-            long idCard = Long.parseLong(sc.nextLine());
+            long idCard = inputLong();
             System.out.print("Phone number : ");
-            long phoneNumber = Long.parseLong(sc.nextLine());
+            long phoneNumber = inputLong();
 
             while (true) {
                 System.out.println("");
@@ -168,7 +170,7 @@ public class MainMenu {
         System.out.println("-----------------------------------------------------");
         System.out.println("{ Checkout }");
         System.out.print("Enter room number : ");
-        int roomNumber = Integer.parseInt(sc.nextLine());
+        int roomNumber = inputInt();
         int number = resort.findForSpecifiedRoom(roomNumber);
         long idCard = resort.getSpecifiedRoom(number).getCustomer().getIdCard();
         String cName = resort.getSpecifiedRoom(number).getCustomer().getName();
@@ -259,6 +261,41 @@ public class MainMenu {
         System.out.println("--------------------------------------");
         pwdResort = newpwd2;
         return true;
+    }
+
+    public long inputLong() {
+        while (true) {
+            try {
+                long input;
+                do {
+                    input = sc.nextLong();
+                    if (input < 0) {
+                        System.out.println("Invalid number!");
+                        System.out.print("Please try again: ");
+                    }
+                } while (input < 0);
+                sc.nextLine(); // clear line separator
+                return input;
+            } catch (InputMismatchException e) {
+                System.out.print("Please enter a number: ");
+                sc.next(); // clear scanner wrong input
+                continue;
+            }
+        }
+    }
+
+    public int inputInt() {
+        while (true) {
+            try {
+                int input = sc.nextInt();
+                sc.nextLine(); // clear line separator
+                return input;
+            } catch (InputMismatchException e) {
+                System.out.print("Please enter a number: ");
+                sc.next(); // clear scanner wrong input
+                continue;
+            }
+        }
     }
 
 }
