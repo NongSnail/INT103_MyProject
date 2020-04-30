@@ -15,15 +15,6 @@ public class Room implements Price {
     private LocalDateTime checkout;
     private double price;
 
-    private class dateComparator implements Comparable<LocalDateTime> {
-
-        @Override
-        public int compareTo(LocalDateTime o) {
-            return this.compareTo(o);
-        }
-
-    }
-
     public Room(int number, RoomType rt) {
         this.roomNumber = number;
         this.roomType = rt;
