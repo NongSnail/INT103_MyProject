@@ -34,7 +34,6 @@ public class Resort implements ServiceableResort {
     public Resort(String resortName, Administrator admin, int maximumRoom) {
         this.resortName = resortName;
         this.rooms = new Room[maximumRoom];
-        this.customers = new Customer[maximumRoom];
         this.admin = admin;
     }
 
