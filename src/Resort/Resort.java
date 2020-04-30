@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.NoSuchElementException;
 import java.util.logging.FileHandler;
-import java.util.logging.Level;
 import java.util.logging.SimpleFormatter;
 
 /**
@@ -105,7 +104,7 @@ public class Resort implements ServiceableResort {
                 DateTimeFormatter.ofPattern("yyyy_MM_dd")
         ));
         //////////////////////////////////////////////////////////////////////////////
-        System.setProperty("java.util.logging.SimpleFormatter.format", "%5$s");
+        System.setProperty("java.util.logging.SimpleFormatter.format", "  ");
         //////////////////////////////////////////////////////////////////////////////
         long id = r.getCustomer().getIdCard();
         String name_customer = r.getCustomer().getName();
@@ -137,22 +136,14 @@ public class Resort implements ServiceableResort {
 
             if (!checkHeader(filename)) {
                 logger.info(getHeader());
-            } else {
-                System.out.println(String.format(format,
-                        "Room_Number", "Room_Type", "Customer_Name", "IDCard", "Phone", "Status", "CheckIn", "CheckOut", "Price"));
-            }
+            } 
             
             //log here
             logger.info(String.format(format,
                     roomNumber, roomType, name_customer, id, phone, roomStatus, checkInStr, checkOutStr, price));
             
-            
-        } catch (IOException | SecurityException ex) {
-        }
-        
-        
-        
-        
+        } catch (IOException | SecurityException ex) {}
+   
     }
 
     public static String getHeader() {
