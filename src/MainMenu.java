@@ -304,8 +304,9 @@ public class MainMenu {
         year = Input.inputYear(); // [ Year input ]
         month = Input.inputMonth(); // [ Month input]
         day = Input.inputDay(year, month); // [ Date input ]
-        String format = String.format("../log_history/%d_%d_%d.log", year, month, day);
+        String format = String.format("log_history/%d_%02d_%02d.log", year, month, day);
         resort.readHistory(format);
+        System.out.println();
     }
 
     
