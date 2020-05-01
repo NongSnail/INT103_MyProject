@@ -25,10 +25,12 @@ public class createTable {
         need to change data type to a proper type
         by looking at the Room atributes
         or DBLogger.insert set methods.
+
+        Maybe change the table name?
         */
         try(Connection conn = DBConnection.getConnection()){
             Statement stm = conn.createStatement();
-            stm.executeUpdate("DROP TABLE RESORT");
+            stm.executeUpdate("DROP TABLE RESORT"); // table name
             stm.executeUpdate("CREATE TABLE RESORT ("
                     + "Room_Number INT,"
                     + "Room_Type VARCHAR(20),"
