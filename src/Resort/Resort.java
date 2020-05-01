@@ -136,6 +136,7 @@ public class Resort implements ServiceableResort {
             fh = new FileHandler(filename, true);
             Logger logger = Logger.getLogger(filename);
             logger.addHandler(fh);
+            logger.setUseParentHandlers(false);
             SimpleFormatter formatter = new SimpleFormatter();
             fh.setFormatter(formatter);
 
