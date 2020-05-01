@@ -109,7 +109,7 @@ public class Resort implements ServiceableResort {
                 DateTimeFormatter.ofPattern("yyyy_MM_dd")
         ));
         //////////////////////////////////////////////////////////////////////////////
-        System.setProperty("java.util.logging.SimpleFormatter.format", "  ");
+        System.setProperty("java.util.logging.SimpleFormatter.format", "%5$s");
         //////////////////////////////////////////////////////////////////////////////
         long id = r.getCustomer().getIdCard();
         String name_customer = r.getCustomer().getName();
