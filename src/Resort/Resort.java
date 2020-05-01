@@ -53,7 +53,7 @@ public class Resort implements ServiceableResort {
     public boolean checkIn(Customer c, int roomNumber) {
         int roomIndex = findForSpecifiedRoom(roomNumber); // set index for rooms[]
         // if no room available OR Customer == null
-        if (roomIndex == -1 || c == null) {
+        if (roomIndex == -1 || c == null || rooms[roomIndex].getCustomer() != null) {
             return false;
         }
         rooms[roomIndex].checkIn(c);
@@ -65,7 +65,7 @@ public class Resort implements ServiceableResort {
     public boolean checkout(Customer c, int roomNumber) {
         int roomIndex = findForSpecifiedRoom(roomNumber); // set index for rooms[]
         // if roomNumber not found OR Customer == null OR Customer doesn't match with this rooom.
-        if (roomIndex == -1 || c == null || !rooms[roomIndex].getCustomer().equals(c)) {
+        if (roomIndex == -1 || c == null || !rooms[roomIndex].getCustomer().equals(c) || rooms[roomIndex].getCustomer() == null) {
             return false;
         }
         rooms[roomIndex].checkout();

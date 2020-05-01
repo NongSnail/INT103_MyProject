@@ -117,7 +117,7 @@ public class MainMenu {
                     exit(0);
                 default:
                     System.out.println("-------------------------------------------------------------");
-                    System.out.println("\u001B[31mPlease type again..  QwQ \u001B[0m");
+                    System.out.println("Please type again..  QwQ ");
             }
         } while (selectedChoice != 6);
     }
@@ -132,13 +132,17 @@ public class MainMenu {
         System.exit(exitedCode);
     }
 
-    public void checkIn() { // no filter for double checkin
+    public boolean checkIn() {
         System.out.println("-----------------------------------------------------");
         System.out.println("{ CheckIn }");
         System.out.print("Enter room number : ");
         int roomNumber = Input.inputInt();
         int number = resort.findForSpecifiedRoom(roomNumber);
         if (number != -1) {
+            if (resort.getRooms()[number].getCustomer() != null) {
+                System.out.println("Can't check-in, this room has customer already.");
+                return false;
+            }
             System.out.println("");
             System.out.println("-----------[ CheckIn At Room Number " + roomNumber + " ]-----------");
             System.out.print("Customer Name : ");
@@ -170,17 +174,26 @@ public class MainMenu {
                     System.out.println("\u001B[31mPlease type again..  QwQ \u001B[0m");
                 }
             }
-        } else {
-            System.out.println("Room not found!");
-        }
+            return true;
+        } 
+        System.out.println("Room not found!");
+        return false;
     }
 
-    public void checkout() { // checkout without Customer -> NullPointerException
+    public boolean checkout() {
         System.out.println("-----------------------------------------------------");
         System.out.println("{ Checkout }");
         System.out.print("Enter room number : ");
         int roomNumber = Input.inputInt();
         int number = resort.findForSpecifiedRoom(roomNumber);
+        if (number == -1) {
+            System.out.println("Room not found!");
+            return false;
+        }
+        if (resort.getRooms()[number].getCustomer() == null) {
+            System.out.println("Can't checkout, this room doesn't have a customer.");
+            return false;
+        }
         long idCard = resort.getSpecifiedRoom(number).getCustomer().getIdCard();
         String cName = resort.getSpecifiedRoom(number).getCustomer().getName();
         long phoneNumber = resort.getSpecifiedRoom(number).getCustomer().getPhoneNumber();
@@ -202,9 +215,8 @@ public class MainMenu {
                 System.out.println("-------------------------------------------------------------");
                 System.out.println("\u001B[31mPlease type again..  QwQ \u001B[0m");
             }
-
         }
-
+        return true;
     }
 
     public void listRoom() {
