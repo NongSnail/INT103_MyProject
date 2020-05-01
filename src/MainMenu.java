@@ -6,6 +6,7 @@ import Resort.Room;
 import Resort.RoomType;
 
 import java.io.Console;
+import java.util.Formatter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -259,7 +260,7 @@ public class MainMenu {
                 System.out.println("Enter your new password (again) : ");
                 newpwd2 = sc.nextLine();
             } while (newpwd2.equals(""));
-            
+
             // condition !Arrays.equals(newpwd, newpwd2)
             if (!newpwd.equals(newpwd2)) {
                 System.out.println("--------------------------------------");
@@ -268,7 +269,7 @@ public class MainMenu {
                 return false;
             }
         } while (!newpwd.equals(newpwd2));
-        
+
         // if condition is true then we can reset passsword.
         System.out.println("--------------------------------------");
         System.out.println("     PASSWORD HAS BEEN UPDATED");
@@ -278,7 +279,25 @@ public class MainMenu {
     }
 
     public void history() {
-       resort.readHistory("log_history/2020_04_29.log");
+//        users input dd-mm-yyyy
+        int days;
+        int months;
+        int years;
+        
+        System.out.println("--------------------------------------");
+        System.out.println("            logHistory                ");
+        System.out.println("--------------------------------------");
+        System.out.println("Structure of searching : dd-mm-yyyy");
+        
+        System.out.println("Enter days (dd) : ");
+        days = inputInt();
+        System.out.println("Enter months (mm) : ");
+        months = inputInt();
+        System.out.println("Enter years (yyyy) : ");
+        years = inputInt();
+        
+        String format = String.format("log_history/%d_%d_%d.log", years, months, days);
+        resort.readHistory(format);
     }
 
     public long inputLong() {
