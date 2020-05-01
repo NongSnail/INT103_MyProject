@@ -278,7 +278,7 @@ public class MainMenu {
     }
 
     public void history() {
-       resort.readHistory("2020_04_29.log");
+       resort.readHistory("log_history/2020_04_29.log");
     }
 
     public long inputLong() {
