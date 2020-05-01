@@ -6,6 +6,7 @@ import Resort.Room;
 import Resort.RoomType;
 
 import java.io.Console;
+import java.time.LocalDateTime;
 import java.util.Formatter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -280,23 +281,19 @@ public class MainMenu {
 
     public void history() {
 //        users input dd-mm-yyyy
-        int days;
-        int months;
-        int years;
+        int day;
+        int month;
+        int year;
         
         System.out.println("--------------------------------------");
         System.out.println("            logHistory                ");
         System.out.println("--------------------------------------");
-        System.out.println("Structure of searching : dd-mm-yyyy");
-        
-        System.out.println("Enter days (dd) : ");
-        days = inputInt();
-        System.out.println("Enter months (mm) : ");
-        months = inputInt();
-        System.out.println("Enter years (yyyy) : ");
-        years = inputInt();
-        
-        String format = String.format("log_history/%d_%d_%d.log", years, months, days);
+        System.out.println("Structure of searching : yyyy-mm-dd");
+
+        year = inputYear(); // [ Year input ]
+        month = inputMonth(); // [ Month input]
+        day = inputDay(year, month); // [ Date input ]
+        String format = String.format("log_history/%d_%d_%d.log", year, month, day);
         resort.readHistory(format);
     }
 
@@ -333,6 +330,66 @@ public class MainMenu {
                 continue;
             }
         }
+    }
+
+    public int inputYear() {
+        int year;
+        do {
+            System.out.println("Enter years (yyyy) : ");
+            year = inputInt();
+            if (year > LocalDateTime.now().getYear() || year < 0) {
+                System.out.println("Invalid year!");
+            }
+        } while (year > LocalDateTime.now().getYear() || year < 0);
+        return year;
+    }
+
+    public int inputMonth() {
+        int month;
+        do {
+            System.out.println("Enter months (mm) : ");
+            month = inputInt();
+            if (month > 12 || month < 0) {
+                System.out.println("Invalid month!");
+            }
+        } while (month > 12 || month < 0);
+        return month;
+    }
+
+    public int inputDay(int year, int month) {
+        int day;
+        boolean invalidDate = true;
+        do {
+            System.out.println("Enter days (dd) : ");
+            day = inputInt();
+            // [ set numDay of month ]
+            int numDay;
+            switch (month) {
+                case 2: // case: Febuary
+                    if (year % 4 == 0) {
+                        numDay = 29;
+                    } else {
+                        numDay = 28;
+                    }
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    numDay = 30;
+                    break;
+                default: // case: 1,3,5,7,8,10,12
+                    numDay = 31;
+                    break;
+            }
+            if (day > numDay || day < 1) {
+                System.out.println("Invalid date!");
+                continue;
+            } else {
+                invalidDate = false;
+            }
+        } while (invalidDate);
+        return day;
     }
 
 }
