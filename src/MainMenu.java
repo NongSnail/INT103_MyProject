@@ -4,6 +4,7 @@ import Person.Customer;
 import Resort.Resort;
 import Resort.Room;
 import Resort.RoomType;
+import util.Input;
 
 import java.io.Console;
 import java.time.LocalDateTime;
@@ -88,7 +89,7 @@ public class MainMenu {
         System.out.println("《6》exit");
         System.out.println("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒");
         System.out.print("Enter Your Menu [1‐5]: ");
-        selectedChoice = inputInt();
+        selectedChoice = Input.inputInt();
 
     }
 
@@ -134,16 +135,16 @@ public class MainMenu {
         System.out.println("-----------------------------------------------------");
         System.out.println("{ CheckIn }");
         System.out.print("Enter room number : ");
-        int roomNumber = inputInt();
+        int roomNumber = Input.inputInt();
         int number = resort.findForSpecifiedRoom(roomNumber);
         if (number != -1) {
             System.out.println("-----------[ CheckIn At Room Number " + roomNumber + " ]-----------");
             System.out.print("Customer Name : ");
             String cName = sc.nextLine();
             System.out.print("Customer ID card : ");
-            long idCard = inputLong();
+            long idCard = Input.inputLong();
             System.out.print("Phone number : ");
-            long phoneNumber = inputLong();
+            long phoneNumber = Input.inputLong();
 
             while (true) {
                 System.out.println("");
@@ -167,7 +168,8 @@ public class MainMenu {
                     System.out.println("Please type again..  QwQ ");
                 }
             }
-
+        } else {
+            System.out.println("Room not found!");
         }
     }
 
@@ -175,7 +177,7 @@ public class MainMenu {
         System.out.println("-----------------------------------------------------");
         System.out.println("{ Checkout }");
         System.out.print("Enter room number : ");
-        int roomNumber = inputInt();
+        int roomNumber = Input.inputInt();
         int number = resort.findForSpecifiedRoom(roomNumber);
         long idCard = resort.getSpecifiedRoom(number).getCustomer().getIdCard();
         String cName = resort.getSpecifiedRoom(number).getCustomer().getName();
@@ -290,106 +292,13 @@ public class MainMenu {
         System.out.println("--------------------------------------");
         System.out.println("Structure of searching : yyyy-mm-dd");
 
-        year = inputYear(); // [ Year input ]
-        month = inputMonth(); // [ Month input]
-        day = inputDay(year, month); // [ Date input ]
-        String format = String.format("log_history/%d_%d_%d.log", year, month, day);
+        year = Input.inputYear(); // [ Year input ]
+        month = Input.inputMonth(); // [ Month input]
+        day = Input.inputDay(year, month); // [ Date input ]
+        String format = String.format("../log_history/%d_%d_%d.log", year, month, day);
         resort.readHistory(format);
     }
 
-    public long inputLong() {
-        while (true) {
-            try {
-                long input;
-                do {
-                    input = sc.nextLong();
-                    if (input < 0) {
-                        System.out.println("Invalid number!");
-                        System.out.print("Please try again: ");
-                    }
-                } while (input < 0);
-                sc.nextLine(); // clear line separator
-                return input;
-            } catch (InputMismatchException e) {
-                System.out.print("Please enter a number: ");
-                sc.next(); // clear scanner wrong input
-                continue;
-            }
-        }
-    }
-
-    public int inputInt() {
-        while (true) {
-            try {
-                int input = sc.nextInt();
-                sc.nextLine(); // clear line separator
-                return input;
-            } catch (InputMismatchException e) {
-                System.out.print("Please enter a number: ");
-                sc.next(); // clear scanner wrong input
-                continue;
-            }
-        }
-    }
-
-    public int inputYear() {
-        int year;
-        do {
-            System.out.println("Enter years (yyyy) : ");
-            year = inputInt();
-            if (year > LocalDateTime.now().getYear() || year < 0) {
-                System.out.println("Invalid year!");
-            }
-        } while (year > LocalDateTime.now().getYear() || year < 0);
-        return year;
-    }
-
-    public int inputMonth() {
-        int month;
-        do {
-            System.out.println("Enter months (mm) : ");
-            month = inputInt();
-            if (month > 12 || month < 0) {
-                System.out.println("Invalid month!");
-            }
-        } while (month > 12 || month < 0);
-        return month;
-    }
-
-    public int inputDay(int year, int month) {
-        int day;
-        boolean invalidDate = true;
-        do {
-            System.out.println("Enter days (dd) : ");
-            day = inputInt();
-            // [ set numDay of month ]
-            int numDay;
-            switch (month) {
-                case 2: // case: Febuary
-                    if (year % 4 == 0) {
-                        numDay = 29;
-                    } else {
-                        numDay = 28;
-                    }
-                    break;
-                case 4:
-                case 6:
-                case 9:
-                case 11:
-                    numDay = 30;
-                    break;
-                default: // case: 1,3,5,7,8,10,12
-                    numDay = 31;
-                    break;
-            }
-            if (day > numDay || day < 1) {
-                System.out.println("Invalid date!");
-                continue;
-            } else {
-                invalidDate = false;
-            }
-        } while (invalidDate);
-        return day;
-    }
+    
 
 }

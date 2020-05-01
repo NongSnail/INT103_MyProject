@@ -14,7 +14,6 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import static java.lang.System.in;
 import java.nio.Buffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
