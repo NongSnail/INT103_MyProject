@@ -9,7 +9,13 @@ import java.util.logging.Logger;
 
 import Person.Administrator;
 import Person.Customer;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import static java.lang.System.in;
+import java.nio.Buffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -45,7 +51,7 @@ public class Resort implements ServiceableResort {
     }
 
     @Override
-    public boolean checkIn(Customer c,int roomNumber) {
+    public boolean checkIn(Customer c, int roomNumber) {
         int roomIndex = findForSpecifiedRoom(roomNumber); // set index for rooms[]
         // if no room available OR Customer == null
         if (roomIndex == -1 || c == null) {
@@ -136,14 +142,15 @@ public class Resort implements ServiceableResort {
 
             if (!checkHeader(filename)) {
                 logger.info(getHeader());
-            } 
-            
+            }
+
             //log here
             logger.info(String.format(format,
                     roomNumber, roomType, name_customer, id, phone, roomStatus, checkInStr, checkOutStr, price));
-            
-        } catch (IOException | SecurityException ex) {}
-   
+
+        } catch (IOException | SecurityException ex) {
+        }
+
     }
 
     public static String getHeader() {
@@ -164,4 +171,17 @@ public class Resort implements ServiceableResort {
         return "Record history".equals(firstLine);
     }
 
+    public  void readHistory(String file) {
+        try {
+            FileInputStream fstream = new FileInputStream(file);
+            BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+            String strLine;
+            while ((strLine = br.readLine()) != null) {
+                System.out.println(strLine);
+            }
+            fstream.close();
+        } catch (Exception e) {
+            System.err.println("Error : " + e.getMessage());
+        }
+    }
 }

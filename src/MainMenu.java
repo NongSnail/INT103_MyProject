@@ -157,6 +157,7 @@ public class MainMenu {
                     //RoomType t = resort.getSpecifiedRoom(number).getRoomType();
                     resort.checkIn(c, roomNumber);
                     System.out.println(" [ CheckIn Completed ]");
+                    break;
                 } else if (s.equals("n")) {
                     break;
                 } else {
@@ -188,6 +189,7 @@ public class MainMenu {
                 Customer c = resort.getSpecifiedRoom(number).getCustomer();
                 resort.checkout(c, roomNumber);
                 System.out.println(" [ Checkout Completed ]");
+                break;
             } else if (s.equals("n")) {
                 break;
             } else {
@@ -276,7 +278,7 @@ public class MainMenu {
     }
 
     public void history() {
-        // to show History of each day
+       resort.readHistory("2020_04_29.log");
     }
 
     public long inputLong() {
