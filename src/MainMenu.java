@@ -132,7 +132,7 @@ public class MainMenu {
         System.exit(exitedCode);
     }
 
-    public void checkIn() {
+    public void checkIn() { // no filter for double checkin
         System.out.println("-----------------------------------------------------");
         System.out.println("{ CheckIn }");
         System.out.print("Enter room number : ");
@@ -175,7 +175,7 @@ public class MainMenu {
         }
     }
 
-    public void checkout() {
+    public void checkout() { // checkout without Customer -> NullPointerException
         System.out.println("-----------------------------------------------------");
         System.out.println("{ Checkout }");
         System.out.print("Enter room number : ");
@@ -306,7 +306,6 @@ public class MainMenu {
         day = Input.inputDay(year, month); // [ Date input ]
         String format = String.format("log_history/%d_%02d_%02d.log", year, month, day);
         resort.readHistory(format);
-        System.out.println();
     }
 
     
