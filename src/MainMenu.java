@@ -117,7 +117,7 @@ public class MainMenu {
                     exit(0);
                 default:
                     System.out.println("-------------------------------------------------------------");
-                    System.out.println("Please type again..  QwQ ");
+                    System.out.println("\u001B[31mPlease type again..  QwQ \u001B[0m");
             }
         } while (selectedChoice != 6);
     }
