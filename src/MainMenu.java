@@ -3,6 +3,7 @@ import Person.Administrator;
 import Person.Customer;
 import Resort.Resort;
 import Resort.Room;
+import Resort.RoomStatus;
 import Resort.RoomType;
 import util.Input;
 
@@ -138,6 +139,7 @@ public class MainMenu {
         int roomNumber = Input.inputInt();
         int number = resort.findForSpecifiedRoom(roomNumber);
         if (number != -1) {
+            System.out.println("");
             System.out.println("-----------[ CheckIn At Room Number " + roomNumber + " ]-----------");
             System.out.print("Customer Name : ");
             String cName = sc.nextLine();
@@ -153,19 +155,19 @@ public class MainMenu {
                 System.out.println("{ Customer }");
                 System.out.println("Name : " + cName + "  ID card : " + idCard + "  Phone : " + phoneNumber);
                 System.out.println("");
-                System.out.println("Yes or No? [ press Y/N ]");
+                System.out.println("\u001B[32mYes or No? [ press Y/N ]\u001B[0m");
                 String s = sc.nextLine();
                 if (s.equals("y")) {
                     Customer c = new Customer(idCard, cName, phoneNumber);
                     //RoomType t = resort.getSpecifiedRoom(number).getRoomType();
                     resort.checkIn(c, roomNumber);
-                    System.out.println(" [ CheckIn Completed ]");
+                    System.out.println("\u001B[31m 【 CheckIn Completed! 】\u001B[0m");
                     break;
                 } else if (s.equals("n")) {
                     break;
                 } else {
                     System.out.println("-------------------------------------------------------------");
-                    System.out.println("Please type again..  QwQ ");
+                    System.out.println("\u001B[31mPlease type again..  QwQ \u001B[0m");
                 }
             }
         } else {
@@ -187,18 +189,18 @@ public class MainMenu {
             System.out.println("Room Number : " + roomNumber);
             System.out.println("{ Customer }");
             System.out.println("ID card : " + idCard + " Name : " + cName + "Phone : " + phoneNumber);
-            System.out.println("Need to Checkout? Yes or No? (Y/N)");
+            System.out.println("\u001B[32mNeed to Checkout? Yes or No? (Y/N)\u001B[0m");
             String s = sc.nextLine();
             if (s.equals("y")) {
                 Customer c = resort.getSpecifiedRoom(number).getCustomer();
                 resort.checkout(c, roomNumber);
-                System.out.println(" [ Checkout Completed ]");
+                System.out.println("\u001B[31m 【﻿ Checkout Completed! \u001B[31m");
                 break;
             } else if (s.equals("n")) {
                 break;
             } else {
                 System.out.println("-------------------------------------------------------------");
-                System.out.println("Please type again..  QwQ ");
+                System.out.println("\u001B[31mPlease type again..  QwQ \u001B[0m");
             }
 
         }
@@ -214,8 +216,15 @@ public class MainMenu {
             if (rs[i] == null) {
                 break;
             }
+            String getStatus = rs[i].getRoomStatus().toString();
+            String status;
+            if(getStatus.equals(RoomStatus.AVAILABLE.toString())){
+                status ="\u001B[32m"+getStatus+"\u001B[0m";
+            } else {
+                status ="\u001B[31m"+getStatus+"\u001B[0m";
+            }
             System.out.println(String.format("%5s %15s %15s", rs[i].getRoomNumber(), rs[i].getRoomType().toString(),
-                    rs[i].getRoomStatus()));
+                    status));
 
         }
         System.out.println("-----------------------------------------------------");
