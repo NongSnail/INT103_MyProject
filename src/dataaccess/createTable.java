@@ -20,7 +20,12 @@ public class createTable {
         insertTable();
     }
     
-    public static void createTable(){
+    public static void createTable(){ 
+        /*
+        need to change data type to a proper type
+        by looking at the Room atributes
+        or DBLogger.insert set methods.
+        */
         try(Connection conn = DBConnection.getConnection()){
             Statement stm = conn.createStatement();
             stm.executeUpdate("DROP TABLE RESORT");
