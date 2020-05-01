@@ -44,7 +44,7 @@ public class Resort implements ServiceableResort {
 
     public boolean buildRoom(RoomType rt) {
         if (totalRoom < rooms.length) {
-            rooms[totalRoom] = new Room(totalRoom++, rt);
+            rooms[totalRoom] = new Room(++totalRoom, rt);
             return true;
         }
         return false;
