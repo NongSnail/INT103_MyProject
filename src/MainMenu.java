@@ -201,13 +201,14 @@ public class MainMenu {
             System.out.println("Room Number : " + roomNumber);
             System.out.println("{ Customer }");
             System.out.println("ID card : " + idCard + "  Name : " + cName + "  Phone : " + phoneNumber);
+            System.out.println("\u001B[31m Total price of Room : " + price  + "\u001B[0m" );
             System.out.println("\u001B[32mNeed to Checkout? Yes or No? (Y/N)\u001B[0m");
             String s = sc.nextLine();
             if (s.equals("y")) {
                 Customer c = resort.getSpecifiedRoom(number).getCustomer();
                 resort.checkout(c, roomNumber);
                 System.out.println("\u001B[31m 【﻿ Checkout Completed! 】\u001B[0m");
-                System.out.println("\u001B[31m Total price of Room no. " + number + "\u001B[0m" );
+                
                 System.out.println("");
                 break;
             } else if (s.equals("n")) {
