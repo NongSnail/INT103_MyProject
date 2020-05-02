@@ -8,9 +8,6 @@ import Resort.RoomType;
 import util.Input;
 
 import java.io.Console;
-import java.time.LocalDateTime;
-import java.util.Formatter;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -33,7 +30,6 @@ public class MainMenu {
 
     private Scanner sc;
     private Resort resort;
-    private Room room;
 
     private final String resortName = "LuLu the cat";
     private final int max = 10;
@@ -117,7 +113,7 @@ public class MainMenu {
                     exit(0);
                 default:
                     System.out.println("-------------------------------------------------------------");
-                    System.out.println("Please type again..  QwQ ");
+                    System.out.println("\u001B[31mPlease type again..  QwQ \u001B[0m");
             }
         } while (selectedChoice != 6);
     }
@@ -140,7 +136,7 @@ public class MainMenu {
         int number = resort.findForSpecifiedRoom(roomNumber);
         if (number != -1) {
             if (resort.getRooms()[number].getCustomer() != null) {
-                System.out.println("Can't check-in, this room has customer already.");
+                System.out.println("\u001B[31mCan't check-in, this room has customer already.\u001B[0m");
                 return false;
             }
             System.out.println("");
@@ -176,7 +172,7 @@ public class MainMenu {
             }
             return true;
         } 
-        System.out.println("Room not found!");
+        System.out.println("\u001B[31mRoom not found!\u001B[0m");
         return false;
     }
 
@@ -207,7 +203,7 @@ public class MainMenu {
             if (s.equals("y")) {
                 Customer c = resort.getSpecifiedRoom(number).getCustomer();
                 resort.checkout(c, roomNumber);
-                System.out.println("\u001B[31m 【﻿ Checkout Completed! \u001B[31m");
+                System.out.println("\u001B[31m 【﻿ Checkout Completed! 】\u001B[0m");
                 break;
             } else if (s.equals("n")) {
                 break;
