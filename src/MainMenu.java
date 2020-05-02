@@ -162,6 +162,7 @@ public class MainMenu {
                     //RoomType t = resort.getSpecifiedRoom(number).getRoomType();
                     resort.checkIn(c, roomNumber);
                     System.out.println("\u001B[31m 【 CheckIn Completed! 】\u001B[0m");
+                    System.out.println("");
                     break;
                 } else if (s.equals("n")) {
                     break;
@@ -183,27 +184,31 @@ public class MainMenu {
         int roomNumber = Input.inputInt();
         int number = resort.findForSpecifiedRoom(roomNumber);
         if (number == -1) {
-            System.out.println("Room not found!");
+            System.out.println("\u001B[31mRoom not found!\u001B[0m");
             return false;
         }
         if (resort.getRooms()[number].getCustomer() == null) {
-            System.out.println("Can't checkout, this room doesn't have a customer.");
+            System.out.println("\u001B[31mCan't checkout, this room doesn't have a customer.\u001B[0m");
             return false;
         }
         long idCard = resort.getSpecifiedRoom(number).getCustomer().getIdCard();
         String cName = resort.getSpecifiedRoom(number).getCustomer().getName();
         long phoneNumber = resort.getSpecifiedRoom(number).getCustomer().getPhoneNumber();
+        double price = resort.getSpecifiedRoom(number).getPrice();
+        
         while (true) {
             System.out.println("-----------[ Confirm information ]-----------");
             System.out.println("Room Number : " + roomNumber);
             System.out.println("{ Customer }");
-            System.out.println("ID card : " + idCard + " Name : " + cName + "Phone : " + phoneNumber);
+            System.out.println("ID card : " + idCard + "  Name : " + cName + "  Phone : " + phoneNumber);
             System.out.println("\u001B[32mNeed to Checkout? Yes or No? (Y/N)\u001B[0m");
             String s = sc.nextLine();
             if (s.equals("y")) {
                 Customer c = resort.getSpecifiedRoom(number).getCustomer();
                 resort.checkout(c, roomNumber);
                 System.out.println("\u001B[31m 【﻿ Checkout Completed! 】\u001B[0m");
+                System.out.println("\u001B[31m Total price of Room no. " + number + "\u001B[0m" );
+                System.out.println("");
                 break;
             } else if (s.equals("n")) {
                 break;
@@ -254,11 +259,11 @@ public class MainMenu {
             //condition !Arrays.equals(currentpwd, pwdResort)
             if (!currentpwd.equals(pwdResort)) {
                 System.out.println("--------------------------------------");
-                System.out.println(" Your current password is incorrect.");
+                System.out.println("\u001B[31m Your current password is incorrect.\u001B[0m");
                 System.out.println("--------------------------------------");
                 currentPasswordInputCounter++;
                 if (currentPasswordInputCounter > 2) {
-                    System.out.println("!!! You have entered incorrect password too much. (more than 3 times) !!!");
+                    System.out.println("\u001B[31m!!! You have entered incorrect password too much. (more than 3 times) !!!\u001B[0m");
                     return false;
                 }
             }
@@ -314,6 +319,7 @@ public class MainMenu {
         day = Input.inputDay(year, month); // [ Date input ]
         String format = String.format("log_history/%d_%02d_%02d.log", year, month, day);
         resort.readHistory(format);
+        System.out.println(" ");
     }
 
     
