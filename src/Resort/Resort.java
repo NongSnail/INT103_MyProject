@@ -11,10 +11,8 @@ import Person.Administrator;
 import Person.Customer;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.Buffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -105,10 +103,12 @@ public class Resort implements ServiceableResort {
     String format = "\n%1$-12s %2$-10s %3$-15s %4$-15s %5$-15s %6$-15s %7$-28s %8$-28s %9$-15s";
 
     public void logHistory(Room r) {
+        //format filename
         String filename = String.format("log_history/%s.log", LocalDate.now().format(
                 DateTimeFormatter.ofPattern("yyyy_MM_dd")
         ));
         //////////////////////////////////////////////////////////////////////////////
+        //format logger
         System.setProperty("java.util.logging.SimpleFormatter.format", "%5$s");
         //////////////////////////////////////////////////////////////////////////////
         long id = r.getCustomer().getIdCard();
@@ -121,7 +121,7 @@ public class Resort implements ServiceableResort {
         LocalDateTime checkIn = r.getCheckIn();
         LocalDateTime checkOut = r.getCheckout();
         double price = r.getPrice();
-
+        //format datetime
         String checkInStr = checkIn.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss a"));
         String checkOutStr;
         if (checkOut == null) {
@@ -148,11 +148,11 @@ public class Resort implements ServiceableResort {
             logger.info(String.format(format,
                     roomNumber, roomType, name_customer, id, phone, roomStatus, checkInStr, checkOutStr, price));
 
-        } catch (IOException | SecurityException ex) {
-        }
+        } catch (IOException | SecurityException ex) { }
 
     }
 
+    //Header table
     public static String getHeader() {
         return "Record history"
                 + "\n----------------------------------------------------------------------------------------------------------------------------------------------------------------------"

@@ -1,9 +1,3 @@
-
-import Person.Administrator;
-import Resort.Resort;
-import Resort.Room;
-import Resort.RoomType;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates

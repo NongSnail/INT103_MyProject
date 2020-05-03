@@ -87,7 +87,6 @@ public class MainMenu {
         System.out.println("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒");
         System.out.print("Enter Your Menu [1‐5]: ");
         selectedChoice = Input.inputInt();
-
     }
 
     public void go() {
@@ -200,7 +199,7 @@ public class MainMenu {
             System.out.println("-----------[ Confirm information ]-----------");
             System.out.println("Room Number : " + roomNumber);
             System.out.println("{ Customer }");
-            System.out.println("ID card : " + idCard + "  Name : " + cName + "  Phone : " + phoneNumber);
+            System.out.println("Name : " + cName + "  ID card : " + idCard +"  Phone : " + phoneNumber);
             System.out.println("\u001B[31m Total price of Room : " + price  + "\u001B[0m" );
             System.out.println("\u001B[32mNeed to Checkout? Yes or No? (Y/N)\u001B[0m");
             String s = sc.nextLine();
@@ -323,6 +322,5 @@ public class MainMenu {
         System.out.println(" ");
     }
 
-    
 
 }
