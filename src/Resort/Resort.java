@@ -104,7 +104,7 @@ public class Resort implements ServiceableResort {
 
     public void logHistory(Room r) {
         //format filename
-        String filename = String.format("log_history/%s.log", LocalDate.now().format(
+            String filename = String.format("log_history/%s.log", LocalDate.now().format(
                 DateTimeFormatter.ofPattern("yyyy_MM_dd")
         ));
         //////////////////////////////////////////////////////////////////////////////
@@ -134,7 +134,7 @@ public class Resort implements ServiceableResort {
         FileHandler fh;
         try {
             fh = new FileHandler(filename, true);
-            Logger logger = Logger.getLogger(filename);
+            Logger logger = Logger.getLogger(Resort.class.getName());
             logger.addHandler(fh);
             logger.setUseParentHandlers(false);
             SimpleFormatter formatter = new SimpleFormatter();
