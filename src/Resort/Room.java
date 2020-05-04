@@ -21,16 +21,6 @@ public class Room implements Price {
         roomStatus = RoomStatus.AVAILABLE;
     }
 
-    public Room(Room r) {
-        this.roomNumber = r.roomNumber;
-        this.roomType = r.roomType;
-        this.roomStatus = r.roomStatus;
-        this.customer = r.customer;
-        this.checkIn = r.checkIn;
-        this.checkout = r.checkout;
-        this.price = r.price;
-    }
-
     public void checkIn(Customer c) {
         customer = c;
         roomStatus = RoomStatus.NOT_AVAILABLE;
